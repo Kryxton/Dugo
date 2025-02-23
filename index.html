@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Ensures mobile responsiveness -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dugu – Plush Pup MemeCoin</title>
+  <!-- Optional Google Font for a friendly, handwritten feel -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" 
+    rel="stylesheet"
+  >
+  <style>
+    /***************************************************
+     * Base (Plush) Styling
+     ***************************************************/
+    body {
+      background-color: #f2ebe3;   /* Soft beige */
+      color: #4b3e2f;             /* Warm brown text */
+      font-family: 'Patrick Hand', cursive, Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+      
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+    .container {
+      background-color: #fff9f3;   /* Light cream background */
+      border: 2px solid #e3d2c3;   /* Subtle brown border */
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      max-width: 700px;
+      width: 100%;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1, p {
+      margin: 10px 0;
+      word-wrap: break-word;
+    }
+    /***************************************************
+     * Header Image Section
+     ***************************************************/
+    .header-image {
+      width: 100%;
+      max-width: 400px;
+      height: 200px;
+      background-color: #f7f0e9;
+      margin: 20px 0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .header-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    /***************************************************
+     * Socials Section
+     ***************************************************/
+    .socials {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    .socials a {
+      display: inline-block;
+      border-radius: 50%;
+      overflow: hidden;
+      transition: transform 0.2s ease;
+    }
+    .socials a:hover {
+      transform: scale(1.1);
+    }
+    .socials img {
+      width: 60px;
+      height: 60px;
+      display: block;
+    }
+    /***************************************************
+     * Contract Address Section
+     ***************************************************/
+    .ca-section {
+      margin: 20px 0;
+      width: 100%;
+      max-width: 400px;
+    }
+    .ca-title {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+    .ca-box {
+      background-color: #f7f0e9;
+      color: #4b3e2f;
+      border: 2px solid #e3d2c3;
+      border-radius: 5px;
+      padding: 12px;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 1.4;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    .copy-btn {
+      margin-top: 8px;
+      padding: 10px;
+      width: 120px;
+      background-color: #f7f0e9;
+      color: #4b3e2f;
+      border: 2px solid #e3d2c3;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+    .copy-btn:hover {
+      background-color: #e3d2c3;
+    }
+    /***************************************************
+     * Photo Editor Section
+     *  - Upload user photo
+     *  - Drag & resize the plush dog overlay
+     *  - Save composite image
+     ***************************************************/
+    .photo-editor-section {
+      margin: 30px 0;
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
+    .photo-editor-section h2 {
+      margin-bottom: 10px;
+      font-size: 1.4em;
+    }
+    .photo-editor-section .controls {
+      margin-bottom: 15px;
+    }
+    /* The photo stage: background set by upload */
+    .photo-stage {
+      position: relative; 
+      width: 100%;
+      max-width: 500px;
+      min-height: 300px;
+      margin: 0 auto;
+      border: 2px dashed #e3d2c3;
+      border-radius: 10px;
+      background-color: #fff;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      overflow: visible; /* allow full view of the overlay */
+    }
+    /* The plush dog overlay */
+    #dogOverlay {
+      position: absolute;
+      width: 120px; /* default size */
+      top: 10px;
+      left: 10px;
+      cursor: move;
+      user-select: none;
+      transition: transform 0.1s ease;
+    }
+    /* Slider for resizing the dog */
+    .slider-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .slider-container label {
+      font-size: 1em;
+    }
+    /* Save button styling */
+    .save-btn {
+      margin-top: 15px;
+      padding: 10px 15px;
+      background-color: #f7f0e9;
+      color: #4b3e2f;
+      border: 2px solid #e3d2c3;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+    .save-btn:hover {
+      background-color: #e3d2c3;
+    }
+    /***************************************************
+     * How To Buy Section
+     ***************************************************/
+    .how-to-buy {
+      margin: 30px 0;
+      width: 100%;
+      max-width: 600px;
+      text-align: left;
+      background-color: #f7f0e9;
+      border: 2px solid #e3d2c3;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .how-to-buy h2 {
+      margin-top: 0;
+      font-size: 1.6em;
+      text-align: center;
+    }
+    .how-to-buy ol {
+      text-align: left;
+      padding-left: 20px;
+      line-height: 1.6;
+    }
+    .how-to-buy li {
+      margin-bottom: 10px;
+    }
+    /***************************************************
+     * Chart Container
+     ***************************************************/
+    .chart-container {
+      width: 100%;
+      max-width: 600px;
+      margin-top: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid #e3d2c3;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background-color: #f7f0e9;
+    }
+    .chart-container iframe {
+      width: 100%;
+      height: 500px; /* Adjust as needed */
+    }
+    /***************************************************
+     * Responsive Adjustments
+     ***************************************************/
+    @media (max-width: 480px) {
+      .container {
+        width: 100%;
+        padding: 10px;
+      }
+      .header-image {
+        height: 150px;
+      }
+      .chart-container iframe {
+        height: 300px;
+      }
+      .ca-box {
+        font-size: 12px;
+        padding: 10px;
+      }
+      .copy-btn {
+        width: 100px;
+        padding: 8px;
+        font-size: 12px;
+      }
+      #dogOverlay {
+        width: 100px; /* slightly smaller on mobile */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Title & Intro -->
+    <h1>Dugu</h1>
+    <p>Cozy, fuzzy, and powered by Solana!</p>
+    
+    <!-- Header Image -->
+    <div class="header-image">
+      <img src="plushdog.jpeg" alt="Plush Pup">
+    </div>
+
+    <!-- Socials Section -->
+    <div class="socials">
+      <a href="https://t.me/DuguCto" target="_blank" rel="noopener noreferrer">
+        <img src="telegram.jpeg" alt="Telegram">
+      </a>
+      <a href="https://x.com/i/communities/1893743409384276191" target="_blank" rel="noopener noreferrer">
+        <img src="twitter.jpeg" alt="Twitter">
+      </a>
+      <a href="https://dexscreener.com/solana/Gm4nNgqduouqwjqNffp46ZaXWaV6ebeXB7f6L22xwj8k" target="_blank" rel="noopener noreferrer">
+        <img src="dex.jpeg" alt="Dexscreener">
+      </a>
+      <a href="https://pump.fun/coin/HCzdTgjtUj5q8gGJj2PetHnsGVpBPqGroBjndTpapump" target="_blank" rel="noopener noreferrer">
+        <img src="Pumpfun.jpeg" alt="PumpFun">
+      </a>
+    </div>
+
+    <!-- Contract Address Section -->
+    <div class="ca-section">
+      <div class="ca-title">Contract Address:</div>
+      <div class="ca-box" id="caAddress">HCzdTgjtUj5q8gGJj2PetHnsGVpBPqGroBjndTpapump</div>
+      <button class="copy-btn" onclick="copyCA()">Copy</button>
+    </div>
+
+    <!-- Photo Editor Section (placed below CA section) -->
+    <div class="photo-editor-section">
+      <h2>Add Plush Pup to Your Photo</h2>
+      <div class="controls">
+        <input type="file" id="uploadInput" accept="image/*" style="font-size:1em;">
+      </div>
+      <div class="photo-stage" id="photoStage">
+        <img src="plushdog.png" alt="Plush Dog" id="dogOverlay">
+      </div>
+      <div class="slider-container" style="margin-top:10px;">
+        <label for="sizeSlider">Dog Size:</label>
+        <input type="range" id="sizeSlider" min="0.5" max="2" step="0.1" value="1">
+      </div>
+      <button class="save-btn" onclick="savePhoto()">Save Photo</button>
+    </div>
+
+    <!-- How To Buy Section (added below the photo editor) -->
+    <div class="how-to-buy">
+      <h2>How to Buy</h2>
+      <ol>
+        <li>Set up a Solana-compatible wallet (e.g., Phantom) and fund it with SOL.</li>
+        <li>Visit a DEX (e.g., Jupiter or Raydium) and connect your wallet.</li>
+        <li>Use the contract address above to locate Dugu.</li>
+        <li>Swap your SOL for Dugu tokens.</li>
+        <li>Confirm the transaction and enjoy your Dugo!</li>
+      </ol>
+    </div>
+
+    <!-- Chart Container -->
+    <div class="chart-container">
+      <iframe 
+        src="https://birdeye.so/tv-widget/HCzdTgjtUj5q8gGJj2PetHnsGVpBPqGroBjndTpapump?chain=solana&viewMode=pair&chartInterval=15&chartType=Candle&chartTimezone=Europe%2FBerlin&chartLeftToolbar=show&theme=dark" 
+        frameborder="0" 
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <script>
+    /***************************************************
+     * Copy CA to Clipboard
+     ***************************************************/
+    function copyCA() {
+      const caText = document.getElementById("caAddress").textContent.trim();
+      navigator.clipboard.writeText(caText).then(() => {
+        alert("Contract Address copied!");
+      }).catch(err => {
+        console.error("Failed to copy text: ", err);
+      });
+    }
+
+    /***************************************************
+     * Photo Editor Logic
+     ***************************************************/
+    const uploadInput = document.getElementById('uploadInput');
+    const photoStage = document.getElementById('photoStage');
+    const dogOverlay = document.getElementById('dogOverlay');
+    const sizeSlider = document.getElementById('sizeSlider');
+
+    uploadInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        photoStage.style.backgroundImage = `url('${event.target.result}')`;
+      }
+      reader.readAsDataURL(file);
+    });
+
+    /********************
+     * Drag & Drop Logic for Dog Overlay (Mouse & Touch)
+     ********************/
+    let isDragging = false;
+    let dragOffset = { x: 0, y: 0 };
+
+    // Mouse events
+    dogOverlay.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      dragOffset.x = e.clientX - dogOverlay.getBoundingClientRect().left;
+      dragOffset.y = e.clientY - dogOverlay.getBoundingClientRect().top;
+    });
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      let stageRect = photoStage.getBoundingClientRect();
+      let newLeft = e.clientX - stageRect.left - dragOffset.x;
+      let newTop  = e.clientY - stageRect.top - dragOffset.y;
+      dogOverlay.style.left = newLeft + 'px';
+      dogOverlay.style.top = newTop + 'px';
+    });
+    document.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+    // Touch events
+    dogOverlay.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      const touch = e.touches[0];
+      dragOffset.x = touch.clientX - dogOverlay.getBoundingClientRect().left;
+      dragOffset.y = touch.clientY - dogOverlay.getBoundingClientRect().top;
+    });
+    document.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const touch = e.touches[0];
+      let stageRect = photoStage.getBoundingClientRect();
+      let newLeft = touch.clientX - stageRect.left - dragOffset.x;
+      let newTop = touch.clientY - stageRect.top - dragOffset.y;
+      dogOverlay.style.left = newLeft + 'px';
+      dogOverlay.style.top = newTop + 'px';
+    });
+    document.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+
+    // Resize the dog overlay with the slider
+    sizeSlider.addEventListener('input', () => {
+      const scale = sizeSlider.value;
+      dogOverlay.style.transform = `scale(${scale})`;
+    });
+
+    /***************************************************
+     * Save Photo Functionality
+     ***************************************************/
+    function savePhoto() {
+      const bgStyle = window.getComputedStyle(photoStage).backgroundImage;
+      if (!bgStyle || bgStyle === 'none') {
+        alert("Please upload a photo first.");
+        return;
+      }
+      const stageRect = photoStage.getBoundingClientRect();
+      const canvas = document.createElement('canvas');
+      canvas.width = stageRect.width;
+      canvas.height = stageRect.height;
+      const ctx = canvas.getContext('2d');
+
+      const bgUrlMatch = bgStyle.match(/url\(["']?(.+?)["']?\)/);
+      if (!bgUrlMatch || bgUrlMatch.length < 2) {
+        alert("Background image not found.");
+        return;
+      }
+      const bgUrl = bgUrlMatch[1];
+
+      const bgImage = new Image();
+      bgImage.crossOrigin = "Anonymous";
+      bgImage.src = bgUrl;
+      bgImage.onload = () => {
+        ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
+
+        const dogImg = new Image();
+        dogImg.crossOrigin = "Anonymous";
+        dogImg.src = dogOverlay.src;
+        dogImg.onload = () => {
+          const stageBox = photoStage.getBoundingClientRect();
+          const dogBox = dogOverlay.getBoundingClientRect();
+          const posX = dogBox.left - stageBox.left;
+          const posY = dogBox.top - stageBox.top;
+          const drawWidth = dogBox.width;
+          const drawHeight = dogBox.height;
+          ctx.drawImage(dogImg, posX, posY, drawWidth, drawHeight);
+          const dataURL = canvas.toDataURL('image/png');
+          const link = document.createElement('a');
+          link.href = dataURL;
+          link.download = 'PlushPupComposite.png';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        };
+        dogImg.onerror = () => { alert("Error loading the dog overlay image."); };
+      };
+      bgImage.onerror = () => { alert("Error loading the background image."); };
+    }
+  </script>
+</body>
+</html>
